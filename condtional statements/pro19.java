@@ -71,7 +71,7 @@ public class pro19 {
         System.out.println("Seat upgrade fee : $"+supfee);
         System.out.println("Time based- adjacement : "+tbadj+"%");
         System.out.println("Customer discount : "+cusdis+"%");
-        System.out.println("Final ticket price : %.1lf$"+finpri);
+        System.out.printf("Final ticket price : %.1lf$"+finpri);
         String con="No";
         if(showtime.equals("Matinee")||(custype.equals("Senior")) || (custype.equals("Student")) ||(custype.equals("Child"))){
             con="Yes";
