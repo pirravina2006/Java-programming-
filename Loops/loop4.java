@@ -5,6 +5,8 @@ public class loop4 {
         int n=sc.nextInt();
         double sum=0;
         double comi=0;
+        String rep="";
+        double high=0;
         for(int i=1;i<=n;i++){
             String repname=sc.next();
             double slamt=sc.nextDouble();
@@ -18,7 +20,7 @@ public class loop4 {
             else if(slamt>80000 && slamt<=100000){
                 comrate=10;
             }
-            else if(slamt>100000 && slamt<=150000){
+            else if(slamt>100000 && slamt<150000){
                 comrate=12;
             }
             else if(slamt>=150000){
@@ -34,6 +36,10 @@ public class loop4 {
             }
             sum=sum+slamt;
             comi=comi+com;
+            if(slamt>high){
+                high=slamt;
+                rep=repname;
+            }
             System.out.println("Sales Rep : "+repname);
             System.out.println("Sales Amount : $"+slamt);
             System.out.println("Commision rate : "+comrate+"%");
@@ -42,9 +48,11 @@ public class loop4 {
             double tot=com+bon;
             System.out.println("Total Payout : $"+tot);
         }
+        System.out.println("\n");
         System.out.println("Total sales rep : "+n);
         System.out.println("Total sales Amount : $"+sum);
         System.out.println("Total commission : $"+comi);
+        System.out.println("Top performer : "+rep);
         sc.close();
     }
 }
