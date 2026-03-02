@@ -6,7 +6,6 @@ public class loop6 {
         int n=sc.nextInt();
         int scount=0;
         int fcount=0;
-        String rea="";
         double rem=0;
         double sum=0;
         for(int i=1;i<=n;i++){
@@ -15,12 +14,12 @@ public class loop6 {
             if(withamt<=inbal){
                 status="Yes";
                 rem=inbal-withamt;
-                sum=sum+rem;
+                inbal=rem;
                 scount++;
+                sum=sum+withamt;
             }
             else{
                 status="Denied";
-                rea="Insufficient fund";
                 fcount++;
             }
             System.out.println("Transaction "+i+" : $"+withamt);
@@ -28,10 +27,10 @@ public class loop6 {
                 System.out.println("Remaining Balance : $"+rem);
             }
             else{
-                System.out.println("Reason : "+rea);
                 System.out.println("Remaining Balance : $"+rem);
             }
         }
+        System.out.println("\n");
         System.out.println("Total transactions : "+n);
         System.out.println("Sucessful withdrawals : "+scount);
         System.out.println("Failed withdrawals : "+fcount);
@@ -40,3 +39,4 @@ public class loop6 {
         sc.close();
     }
 }
+
