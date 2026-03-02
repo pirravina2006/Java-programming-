@@ -11,22 +11,25 @@ public class loop18 {
         double low=0;
         int hot=0;
         int cold=0;
+        int ext=0;
+        int res=0;
         for(int i=1;i<=n;i++){
             int hour=sc.nextInt();
             double tem=sc.nextDouble();
             String status="";
             if(tem>40 || tem<0){
                 status="Extreme";
+                ext++;
             }
             else if(tem>=32 && tem<=40){
                 status="Hot";
                 hot++;
             }
-            else if(tem>=0 && tem<=10){
+            else if(tem>=0 && tem<10){
                 status="cold";
                 cold++;
             }
-            else if(tem>10 && tem<32){
+            else if(tem>=10 && tem<32){
                 status="Normal";
             }
             if(tem>high){
@@ -40,14 +43,14 @@ public class loop18 {
             sum=sum+tem;
             System.out.println("Hours "+hour+" : "+tem+"C");
             System.out.println("Status : "+status);
+            res=ext+hot;
         }
         avg=sum/n;
         System.out.println("Total readings : "+n);
         System.out.printf("Average temperature : %.2f",avg);
-        System.out.println("\n");
-        System.out.println("Highest temperature : "+high+"C at hour "+tem2);
+        System.out.println("\nHighest temperature : "+high+"C at hour "+tem2);
         System.out.println("Lowest temperature : "+low+"C at hour "+tem3);
-        System.out.println("Hot hours : "+hot);
+        System.out.println("Hot hours : "+res);
         System.out.println("Cold hours : "+cold);
         sc.close();
     }
