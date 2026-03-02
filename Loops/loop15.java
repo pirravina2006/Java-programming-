@@ -33,6 +33,7 @@ public class loop15 {
             rev=rev+fare;
         }
         avg=rev/n;
+        System.out.println("Total Rides : "+n);
         System.out.println("Total distance : "+dis+" km");
         System.out.println("Total revenue : $"+rev);
         System.out.println("Average fare : $"+avg);
