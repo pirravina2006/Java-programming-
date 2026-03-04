@@ -6,11 +6,20 @@ public class loop21 {
         int range=sc.nextInt();
         int pro=1;
         int i=1;
-        while (i<=range) {
+        // while loop multiplication table
+        // while (i<=range) {
+        //     pro=i*n;
+        //     System.out.println(n+" x "+i+" = "+pro);
+        //     i++;
+        // }
+
+        // do-while loop multiplication table
+        do{
             pro=i*n;
             System.out.println(n+" x "+i+" = "+pro);
             i++;
         }
+        while(i<=range);
         sc.close();
     }
 }
