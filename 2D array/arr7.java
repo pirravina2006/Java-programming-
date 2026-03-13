@@ -35,7 +35,3 @@ public class array7 {
         sc.close();
     }
 }
-
-// 2 4
-// 5 15 25 35
-// 10 20 30 40
