@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.Map;
-
 public class WordFrequencyAnalyzer {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
