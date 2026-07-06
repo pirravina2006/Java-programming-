@@ -1,0 +1,21 @@
+
+class Solution{
+    public int minEatingSpeed(int piles[],int h){
+        int s=1;
+        int end=Arrays.stream(piles).max().orElse(0);
+        int mid=0;
+        while(s<=end){
+            mid=s+(end-s)/2;
+            if(canEat(piles,h,mid)) end=mid-1;
+            else s=mid+1;
+        }
+        return s;
+    }
+
+    public static boolean canEat(int arr[],int h,int mid){
+        long current=0;
+        for(int each: arr)
+        current+=(each+mid-1)/mid;
+        return current<=h;
+    }
+}
