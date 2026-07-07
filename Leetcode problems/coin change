@@ -1,0 +1,14 @@
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int def=amount+1;
+        int dp[]=new int[def];
+        Arrays.fill(dp,def);
+        dp[0]=0;
+        for(int cur:coins){
+            for(int i=cur;i<def;i++){
+                dp[i]=Math.min(dp[i],1+dp[i-cur]);
+            }
+        }
+        return dp[amount] == def ? -1 : dp[amount];
+    }
+}
