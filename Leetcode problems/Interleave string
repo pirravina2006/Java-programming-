@@ -1,0 +1,38 @@
+class Solution {
+    public boolean isInterleave(String s1, String s2, String s3) {
+        int m = s1.length();
+        int n = s2.length();
+        
+        // If total length doesn't match, s3 cannot be an interleaving
+        if (m + n != s3.length()) {
+            return false;
+        }
+        
+        // dp array to store results of subproblems
+        boolean[] dp = new boolean[n + 1];
+        
+        // Base case: empty s1 and empty s2 matches empty s3
+        dp[0] = true;
+        
+        // Initialize the DP array for matching an empty s1 with prefixes of s2
+        for (int j = 1; j <= n; j++) {
+            dp[j] = dp[j - 1] && s2.charAt(j - 1) == s3.charAt(j - 1);
+        }
+        
+        // Fill the DP table row by row
+        for (int i = 1; i <= m; i++) {
+            // Update the first element of the row (matching s1 prefix with empty s2)
+            dp[0] = dp[0] && s1.charAt(i - 1) == s3.charAt(i - 1);
+            
+            for (int j = 1; j <= n; j++) {
+                // Current char of s3 is at index (i + j - 1)
+                boolean matchS1 = dp[j] && s1.charAt(i - 1) == s3.charAt(i + j - 1);
+                boolean matchS2 = dp[j - 1] && s2.charAt(j - 1) == s3.charAt(i + j - 1);
+                
+                dp[j] = matchS1 || matchS2;
+            }
+        }
+        
+        return dp[n];
+    }
+}
