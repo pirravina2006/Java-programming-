@@ -1,0 +1,19 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        if(prices==null || prices.length==0) return 0;
+        int s=prices.length;
+        int h=-prices[0];
+        int sold=0;
+        int rest=0;
+        int ph=h,ps=0,pr=0;
+        for(int i=1;i<s;i++){
+            ph=h;
+            ps=sold;
+            pr=rest;
+            h=Math.max(ph,pr-prices[i]);
+            sold=ph+prices[i];
+            rest=Math.max(pr,ps);
+        }
+        return Math.max(sold,rest);
+    }
+}
