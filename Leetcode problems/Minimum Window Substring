@@ -1,0 +1,39 @@
+class Solution {
+    public String minWindow(String s, String t) {
+        if (s == null || t == null || s.length() < t.length()) {
+            return "";
+        }
+        java.util.Map<Character, Integer> targetMap = new java.util.HashMap<>();
+        for (char c : t.toCharArray()) {
+            targetMap.put(c, targetMap.getOrDefault(c, 0) + 1);
+        }
+        java.util.Map<Character, Integer> windowMap = new java.util.HashMap<>();
+        int left = 0, right = 0;
+        int requiredUniqueChars = targetMap.size();
+        int formed = 0;
+        int[] minWindowDetails = {-1, 0, 0};
+        while (right < s.length()) {
+            char rChar = s.charAt(right);
+            windowMap.put(rChar, windowMap.getOrDefault(rChar, 0) + 1);
+            if (targetMap.containsKey(rChar) && windowMap.get(rChar).equals(targetMap.get(rChar))) {
+                formed++;
+            }
+            while (left <= right && formed == requiredUniqueChars) {
+                char lChar = s.charAt(left);
+                int currentWindowLen = right - left + 1;
+                if (minWindowDetails[0] == -1 || currentWindowLen < minWindowDetails[0]) {
+                    minWindowDetails[0] = currentWindowLen;
+                    minWindowDetails[1] = left;
+                    minWindowDetails[2] = right;
+                }
+                windowMap.put(lChar, windowMap.get(lChar) - 1);
+                if (targetMap.containsKey(lChar) && windowMap.get(lChar) < targetMap.get(lChar)) {
+                    formed--;
+                }
+                left++;
+            }
+            right++;
+        }
+        return minWindowDetails[0] == -1 ? "" : s.substring(minWindowDetails[1], minWindowDetails[2] + 1);
+    }
+}
