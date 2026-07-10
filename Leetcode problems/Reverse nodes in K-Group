@@ -1,0 +1,63 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode reverseKGroup(ListNode head, int k) {
+        if (head == null || k == 1) {
+            return head;
+        }
+        
+        // Dummy node to handle edge cases easily (like changing the head)
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        
+        ListNode prevGroupTail = dummy;
+        
+        while (true) {
+            // Check if there are at least k nodes left
+            ListNode groupTail = prevGroupTail;
+            for (int i = 0; i < k; i++) {
+                groupTail = groupTail.next;
+                if (groupTail == null) {
+                    return dummy.next; // Not enough nodes left, we are done
+                }
+            }
+            
+            // Keep track of the nodes around this k-group
+            ListNode nextGroupHead = groupTail.next;
+            ListNode groupHead = prevGroupTail.next;
+            
+            // Disconnect the group to reverse it independently
+            groupTail.next = null;
+            
+            // Reverse the current group
+            prevGroupTail.next = reverse(groupHead);
+            
+            // Connect the reversed group's tail to the next group's head
+            groupHead.next = nextGroupHead;
+            
+            // Move prevGroupTail to the end of the newly reversed group
+            prevGroupTail = groupHead;
+        }
+    }
+    
+    // Helper function to reverse a regular linked list
+    private ListNode reverse(ListNode head) {
+        ListNode prev = null;
+        ListNode curr = head;
+        while (curr != null) {
+            ListNode nextNode = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+        return prev;
+    }
+}
