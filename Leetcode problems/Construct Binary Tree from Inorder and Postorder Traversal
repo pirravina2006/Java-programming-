@@ -1,0 +1,33 @@
+class Solution {
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        if (inorder == null || postorder == null || inorder.length == 0) {
+            return null;
+        }
+        int postIdx = postorder.length - 1;
+        int inIdx = inorder.length - 1;
+        TreeNode root = new TreeNode(postorder[postIdx--]);
+        Stack<TreeNode> stack = new Stack<>();
+        stack.push(root);
+        while (postIdx >= 0) {
+            TreeNode curr = stack.peek();
+            if (curr.val != inorder[inIdx]) {
+                TreeNode rightChild = new TreeNode(postorder[postIdx--]);
+                curr.right = rightChild;
+                stack.push(rightChild);
+            } else {
+                TreeNode lastPopped = null;
+                while (!stack.isEmpty() && stack.peek().val == inorder[inIdx]) {
+                    lastPopped = stack.pop();
+                    inIdx--;
+                }
+                if (lastPopped != null) {
+                    TreeNode leftChild = new TreeNode(postorder[postIdx--]);
+                    lastPopped.left = leftChild;
+                    stack.push(leftChild);
+                }
+            }
+        }
+
+        return root;
+    }
+}
