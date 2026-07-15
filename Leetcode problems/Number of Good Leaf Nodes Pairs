@@ -1,0 +1,46 @@
+class Solution {
+    private int result = 0;
+
+    public int countPairs(TreeNode root, int distance) {
+        result = 0; // Reset for each test case
+        dDive(root, distance);
+        return result;
+    }
+
+    private List<Integer> dDive(TreeNode root, int distance) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        
+        // Leaf node base case
+        if (root.left == null && root.right == null) {
+            List<Integer> temp = new ArrayList<>();
+            temp.add(1);
+            return temp;
+        }
+
+        // Recursively get leaf distances from left and right subtrees
+        List<Integer> lLeft = dDive(root.left, distance);
+        List<Integer> rLeft = dDive(root.right, distance);
+
+        // Check for good leaf pairs across the current root
+        for (int l : lLeft) {
+            for (int r : rLeft) {
+                if (l + r <= distance) {
+                    result++;
+                }
+            }
+        }
+
+        // Increment distances by 1 for the parent node and filter out paths > distance
+        List<Integer> currentDistances = new ArrayList<>();
+        for (int l : lLeft) {
+            if (l + 1 < distance) currentDistances.add(l + 1);
+        }
+        for (int r : rLeft) {
+            if (r + 1 < distance) currentDistances.add(r + 1);
+        }
+
+        return currentDistances;
+    }
+}
