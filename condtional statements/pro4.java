@@ -1,3 +1,4 @@
+// Java code using conditional statements
 import java.util.Scanner;
 public class pro4 {
     public static void main(String[] args) {
