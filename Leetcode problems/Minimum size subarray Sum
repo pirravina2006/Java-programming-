@@ -6,8 +6,6 @@ class Solution {
 
         for (int right = 0; right < nums.length; right++) {
             currentSum += nums[right];
-
-            // Shrink the window from the left as long as the current sum meets or exceeds target
             while (currentSum >= target) {
                 minLength = Math.min(minLength, right - left + 1);
                 currentSum -= nums[left];
